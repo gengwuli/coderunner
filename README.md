@@ -27,13 +27,17 @@ Things you may want to cover:
   rails new my-app --api
 
 2. Set up git 
- ```sh
-  git remote add -t master origin https://github.com/gengwuli/coderunner.git
-  git pull
-  git add .
-  git commit -m 'initial commit'
-  git push --set-upstream origin master
-  git remote -v
-```
+	```sh
+	git remote add -t master origin https://github.com/gengwuli/coderunner.git
+	git pull
+	git add .
+	git commit -m 'initial commit'
+	git push --set-upstream origin master
+	git remote -v
+	```
 
 3. Enable cors 
+
+	3.1 Uncomment in Gemfile
+
+	3.2 Uncomment in config/initializers/cors.rb
