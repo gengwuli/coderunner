@@ -6,23 +6,15 @@ class CodeController < ApplicationController
   def execute
     code = params['code']
     lang = params['lang']
-    res = self.send("#{lang}_handler", code)
+    res = self.send(lang, code)
     render :json => res
   end
 
-  def java_handler(code)
-    JavaExecutor.run code
-  end
-
-  def python_handler(code)
-    PythonExecutor.run code
-  end
-
-  def ruby_handler(code)
-    RubyExecutor.run code
-  end
-
-  def cpp_handler(code)
-    CppExecutor.run code
+  %w(java cpp ruby javascript python elixir).each do |method|
+    module_eval <<-DELEGATORS, __FILE__, __LINE__ + 1
+        def #{method}(code)
+          #{method.capitalize}Executor.run code
+        end
+    DELEGATORS
   end
 end
